@@ -8,25 +8,23 @@ from app.schemas.usuario import Usuario
 class PedidoBase(BaseModel):
     usuario_id: int
     mesa: int
-    data: datetime 
+    emissao: datetime 
     status: str
     total: float
+    created_usuario_id: int
+    created_at: datetime
+    updated_usuario_id: int
+    updated_at: datetime
 
 class PedidoCreate(PedidoBase):
-    created_usuario: Usuario
-    created_at: datetime
     items: List[ItemCreate]
 
 class PedidoUpdate(PedidoBase):
-    updated_usuario: Usuario
-    updated_at: datetime
     items: List[ItemCreate]
 
 class Pedido(PedidoBase):
     id: int
-    
-    updated_at: datetime
     items: List[Item]
 
     class Config:
-        orm_mode = True
+        from_attributes = True

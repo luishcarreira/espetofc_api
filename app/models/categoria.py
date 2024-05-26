@@ -12,3 +12,5 @@ class Categoria(Base):
 
     created_usr: Mapped[str] = mapped_column()
     created_at: Mapped[datetime.datetime] = mapped_column(DateTime)
+
+    produtos: Mapped["Produto"] = relationship(back_populates="categoria")

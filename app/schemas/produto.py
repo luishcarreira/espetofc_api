@@ -1,8 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel
 
-from app.schemas.usuario import User
-
 class ProdutoBase(BaseModel):
     nome: str
     descricao: str
@@ -11,15 +9,17 @@ class ProdutoBase(BaseModel):
     categoria_id: int
 
 class ProdutoCreate(ProdutoBase):
-    created_usuario: User
-    created_at: datetime
+    pass
 
 class ProdutoUpdate(ProdutoBase):
-    updated_usuario: User
-    updated_at: datetime
+    pass
 
 class Produto(ProdutoBase):
     id: int
+    created_usuario_id: int
+    created_at: datetime
+    updated_usuario_id: int
+    updated_at: datetime
 
     class Config:
         from_attributes = True

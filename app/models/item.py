@@ -12,5 +12,5 @@ class Item(Base):
     quantidade: Mapped[int]
     valor: Mapped[float]
     
-    pedido: Mapped['Pedido'] = relationship("Pedido", back_populates="items")
-    produto: Mapped['Produto'] = relationship("Produto", back_populates="items")
+    pedido: Mapped['Pedido'] = relationship(back_populates="items")
+    produto: Mapped['Produto'] = relationship(back_populates="items")

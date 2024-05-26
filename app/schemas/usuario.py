@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 
 class UsuarioBase(BaseModel):
+    nome: str
     username: str
 
 class UsuarioCreate(UsuarioBase):

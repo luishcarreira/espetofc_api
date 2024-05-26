@@ -13,7 +13,7 @@ router = APIRouter()
 
 @router.post("/register", response_model=Usuario)
 def register(user_in: UsuarioCreate, db: Session = Depends(get_db)):
-    user = get_user_by_username(db, email=user_in.username)
+    user = get_user_by_username(db, username=user_in.username)
     if user:
         raise HTTPException(
             status_code=400,
