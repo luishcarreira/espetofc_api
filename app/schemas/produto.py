@@ -18,8 +18,8 @@ class Produto(ProdutoBase):
     id: int
     created_usuario_id: int
     created_at: datetime
-    updated_usuario_id: int
-    updated_at: datetime
+    updated_usuario_id: int | None
+    updated_at: datetime | None
 
     class Config:
         from_attributes = True

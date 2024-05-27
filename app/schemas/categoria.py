@@ -1,10 +1,8 @@
-import datetime
 from pydantic import BaseModel
 
 class CategoriaBase(BaseModel):
     nome: str
     descricao: str
-    created_at: datetime.datetime
 
 class CategoriaCreate(CategoriaBase):
     pass

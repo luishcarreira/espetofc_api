@@ -12,5 +12,6 @@ class Usuario(Base):
 
     created_produtos: Mapped['Produto'] = relationship(back_populates="created_usuario", foreign_keys="[Produto.created_usuario_id]")
     updated_produtos: Mapped['Produto'] = relationship(back_populates="updated_usuario", foreign_keys="[Produto.updated_usuario_id]")
+    
     created_pedidos: Mapped['Pedido'] = relationship(back_populates="created_usuario", foreign_keys="[Pedido.created_usuario_id]")
     updated_pedidos: Mapped['Pedido'] = relationship(back_populates="updated_usuario", foreign_keys="[Pedido.updated_usuario_id]")

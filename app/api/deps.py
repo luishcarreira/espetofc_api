@@ -5,7 +5,7 @@ from app.core.security import decode_access_token
 from app.db.session import SessionLocal
 from app.crud.usuario import get_user_by_username
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
 def get_db():
     db = SessionLocal()
@@ -21,7 +21,7 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_
         headers={"WWW-Authenticate": "Bearer"},
     )
     token_data = decode_access_token(token)
-    user = get_user_by_username(db, user=token_data.username)
+    user = get_user_by_username(db, username=token_data.username)
     if user is None:
         raise credentials_exception
     return user

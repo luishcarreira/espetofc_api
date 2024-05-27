@@ -13,8 +13,8 @@ class PedidoBase(BaseModel):
     total: float
     created_usuario_id: int
     created_at: datetime
-    updated_usuario_id: int
-    updated_at: datetime
+    updated_usuario_id: int | None
+    updated_at: datetime | None
 
 class PedidoCreate(PedidoBase):
     items: List[ItemCreate]

@@ -26,14 +26,14 @@ def create_produto(categoria_in: categoria_schema.CategoriaCreate, db: Session =
 
 @router.put("/{categoria_id}", response_model=categoria_schema.Categoria)
 def update_categoria_endpoint(categoria_id: int, categoria: categoria_schema.CategoriaUpdate, db: Session = Depends(get_db)):
-    db_categoria = get_categoria(db, categoria_id=categoria_id)
+    db_categoria = categoria_crud.get_categoria(db, id=categoria_id)
     if db_categoria is None:
         raise HTTPException(status_code=404, detail="Categoria não encontrada")
     return categoria_crud.update_categoria(db=db, db_categoria=db_categoria, categoria_update=categoria)
 
 @router.delete("/{categoria_id}", response_model=categoria_schema.Categoria)
 def delete_categoria_endpoint(categoria_id: int, db: Session = Depends(get_db)):
-    db_categoria = get_categoria(categoria_id=categoria_id, db=db)
+    db_categoria = categoria_crud.get_categoria(db=db, id=categoria_id)
     if db_categoria is None:
         raise HTTPException(status_code=404, detail="Categoria não encontrada")
     return categoria_crud.delete_categoria(db=db, db_categoria=db_categoria)

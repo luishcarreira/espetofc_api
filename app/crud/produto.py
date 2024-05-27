@@ -13,6 +13,7 @@ def get_produtos(db: Session, skip: int = 0, limit: int = 100):
 def create_produto(db: Session, produto: ProdutoCreate, current_user: Usuario):
     db_produto = Produto(
         nome=produto.nome,
+        estoque=produto.estoque,
         preco=produto.preco,
         descricao=produto.descricao,
         categoria_id=produto.categoria_id,

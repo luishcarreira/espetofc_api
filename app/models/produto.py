@@ -11,7 +11,7 @@ class Produto(Base):
     descricao: Mapped[str] = mapped_column(String(200))
     preco: Mapped[float]
     estoque: Mapped[int]
-    foto_url: Mapped[str] = mapped_column(String(500))
+    foto_url: Mapped[str] = mapped_column(String(500), nullable=True)
 
     categoria_id: Mapped[int] = mapped_column(ForeignKey("categorias.id"))
     categoria: Mapped['Categoria'] = relationship(back_populates="produtos")
@@ -20,8 +20,8 @@ class Produto(Base):
     created_usuario: Mapped["Usuario"] = relationship(back_populates="created_produtos", foreign_keys=[created_usuario_id])
     created_at: Mapped[datetime.datetime] = mapped_column(DateTime)
 
-    updated_usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.id"))
+    updated_usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.id"), nullable=True)
     updated_usuario: Mapped['Usuario'] = relationship(back_populates="updated_produtos", foreign_keys=[updated_usuario_id])
-    updated_at: Mapped[datetime.datetime] = mapped_column(DateTime)
+    updated_at: Mapped[datetime.datetime] = mapped_column(DateTime, nullable=True)
 
     items: Mapped[List["Item"]] = relationship(back_populates="produto")
