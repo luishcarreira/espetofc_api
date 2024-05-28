@@ -6,15 +6,8 @@ from app.schemas.item import Item, ItemCreate
 from app.schemas.usuario import Usuario
 
 class PedidoBase(BaseModel):
-    usuario_id: int
     mesa: int
-    emissao: datetime 
     status: str
-    total: float
-    created_usuario_id: int
-    created_at: datetime
-    updated_usuario_id: int | None
-    updated_at: datetime | None
 
 class PedidoCreate(PedidoBase):
     items: List[ItemCreate]
@@ -24,6 +17,12 @@ class PedidoUpdate(PedidoBase):
 
 class Pedido(PedidoBase):
     id: int
+    emissao: datetime
+    total: float
+    created_usuario_id: int
+    created_at: datetime
+    updated_usuario_id: int | None
+    updated_at: datetime | None
     items: List[Item]
 
     class Config:

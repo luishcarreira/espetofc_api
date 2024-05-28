@@ -13,31 +13,30 @@ def get_pedidos(db: Session, skip: int = 0, limit: int = 100):
 
 def create_pedido(db: Session, pedido: PedidoCreate, current_user: Usuario):
     db_pedido = Pedido(
-        usuario_id=pedido.usuario_id,
         mesa=pedido.mesa,
-        emissao=pedido.emissao,
+        emissao=datetime.now(),
         status=pedido.status,
-        total=pedido.total,
         created_usuario_id=current_user.id,
         created_at=datetime.now(),
+        total=0.0
     )
     db.add(db_pedido)
     db.commit()
     db.refresh(db_pedido)
     
+    valor_total: float = 0.0
     for item in pedido.items:
-        db_item = Item(pedido_id=db_pedido.id, produto_id=item.produto_id, quantidade=item.quantidade)
+        valor_total += (item.valor * item.quantidade)
+        db_item = Item(pedido_id=db_pedido.id, produto_id=item.produto_id, quantidade=item.quantidade, valor=item.valor)
         db.add(db_item)
-    
+
+    db_pedido.total = valor_total
     db.commit()
     return db_pedido
 
 def update_pedido(db: Session, db_pedido: Pedido, pedido_update: PedidoUpdate, current_user: Usuario):
-    db_pedido.usuario_id = pedido_update.usuario_id
     db_pedido.mesa=pedido_update.mesa,
-    db_pedido.emissao=pedido_update.emissao,
     db_pedido.status=pedido_update.status,
-    db_pedido.total = pedido_update.total
     db_pedido.updated_usuario_id = current_user.id
     db_pedido.updated_at = datetime.now()
     db.commit()
@@ -46,10 +45,13 @@ def update_pedido(db: Session, db_pedido: Pedido, pedido_update: PedidoUpdate, c
     db.query(Item).filter(Item.pedido_id == db_pedido.id).delete()
     db.commit()
     
+    valor_total: float = 0.0
     for item in pedido_update.items:
-        db_item = Item(pedido_id=db_pedido.id, produto_id=item.produto_id, quantidade=item.quantidade)
+        valor_total += (item.valor * item.quantidade)
+        db_item = Item(pedido_id=db_pedido.id, produto_id=item.produto_id, quantidade=item.quantidade, valor=item.valor)
         db.add(db_item)
-    
+
+    db_pedido.total = valor_total
     db.commit()
     return db_pedido
 
