@@ -38,4 +38,4 @@ def update_produto(db: Session, db_produto: Produto, produto_update: ProdutoUpda
 def delete_produto(db: Session, db_produto: Produto):
     db.delete(db_produto)
     db.commit()
-    return db_produto
+    return True

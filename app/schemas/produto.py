@@ -1,6 +1,8 @@
 from datetime import datetime
 from pydantic import BaseModel
 
+from app.schemas.categoria import Categoria
+
 class ProdutoBase(BaseModel):
     nome: str
     descricao: str
@@ -16,6 +18,7 @@ class ProdutoUpdate(ProdutoBase):
 
 class Produto(ProdutoBase):
     id: int
+    categoria: Categoria
     created_usuario_id: int
     created_at: datetime
     updated_usuario_id: int | None

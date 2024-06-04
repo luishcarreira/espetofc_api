@@ -60,4 +60,4 @@ def delete_pedido(db: Session, db_pedido: Pedido):
     db.commit()
     db.delete(db_pedido)
     db.commit()
-    return db_pedido
+    return True

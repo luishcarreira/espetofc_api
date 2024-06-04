@@ -21,3 +21,5 @@ class Pedido(Base):
     updated_usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.id"), nullable=True)
     updated_usuario: Mapped['Usuario'] = relationship(back_populates="updated_pedidos", foreign_keys=[updated_usuario_id])
     updated_at: Mapped[datetime.datetime] = mapped_column(DateTime, nullable=True)
+
+    transacoes: Mapped[list['Transacao']] = relationship(back_populates="pedido")

@@ -27,4 +27,4 @@ def update_categoria(db: Session, db_categoria: Categoria, categoria_update: Cat
 def delete_categoria(db: Session, db_categoria: Categoria) -> Categoria:
     db.delete(db_categoria)
     db.commit()
-    return db_categoria
+    return True
