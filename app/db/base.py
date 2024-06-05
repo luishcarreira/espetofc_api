@@ -4,5 +4,9 @@ from app.models.categoria import Categoria
 from app.models.produto import Produto
 from app.models.caixa import Caixa
 from app.models.transacao import Transacao
+from app.models.combo_produto import ComboProduto
+from app.models.combo import Combo
+from app.models.pedido_combo import PedidoCombo
+from app.models.pedido_combo_produto import PedidoComboProduto
 from app.models.pedido import Pedido
 from app.models.item import Item
