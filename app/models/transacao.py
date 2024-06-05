@@ -3,6 +3,7 @@ from typing import Literal
 from sqlalchemy import ForeignKey, String, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base_class import Base
+from app.models.caixa import Caixa
 
 TipoTransacaoEnum = Literal["Entrada", "Saída"]
 TipoPagamentoEnum = Literal["Dinheiro","CartaoCredito","CartaoDebito","Pix","TransferenciaBancaria","Outros"]
@@ -19,5 +20,5 @@ class Transacao(Base):
     caixa_id: Mapped[int] = mapped_column(ForeignKey("caixas.id"))
     caixa: Mapped['Caixa'] = relationship(back_populates="transacoes")
 
-    pedido_id: Mapped[int] = mapped_column(ForeignKey("pedidos.id"))
-    pedido: Mapped['Pedido'] = relationship(back_populates="transacoes")
+    pedido_id: Mapped[int] = mapped_column(ForeignKey("pedidos.id"), nullable=True)
+    pedido_transacao: Mapped['Pedido'] = relationship(back_populates="transacoes")
