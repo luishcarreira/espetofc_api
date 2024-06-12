@@ -16,6 +16,7 @@ def create_pedido(db: Session, pedido: PedidoCreate, current_user: Usuario):
         mesa=pedido.mesa,
         emissao=datetime.now(),
         status=pedido.status,
+        observacao=pedido.observacao if pedido.observacao is not None else '',
         created_usuario_id=current_user.id,
         created_at=datetime.now(),
         total=0.0
@@ -37,6 +38,7 @@ def create_pedido(db: Session, pedido: PedidoCreate, current_user: Usuario):
 def update_pedido(db: Session, db_pedido: Pedido, pedido_update: PedidoUpdate, current_user: Usuario):
     db_pedido.mesa=pedido_update.mesa,
     db_pedido.status=pedido_update.status,
+    db_pedido.observacao=pedido_update.observacao,
     db_pedido.updated_usuario_id = current_user.id
     db_pedido.updated_at = datetime.now()
     db.commit()

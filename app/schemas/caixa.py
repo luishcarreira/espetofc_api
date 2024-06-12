@@ -6,19 +6,20 @@ from app.schemas.transacao import Transacao
 
 
 class CaixaBase(BaseModel):
-    data_abertura: datetime
-    data_fechamento: Optional[datetime]
-    saldo_inicial: float
-    saldo_final: Optional[float]
+    pass
 
 class CaixaCreate(CaixaBase):
-    pass
+    saldo_inicial: float
 
 class CaixaUpdate(CaixaBase):
-    pass
+    saldo_final: Optional[float]
 
 class Caixa(CaixaBase):
     id: int
+    data_abertura: datetime
+    saldo_inicial: float
+    saldo_final: Optional[float]
+    data_fechamento: Optional[datetime]
     transacoes: List[Transacao] = []
 
     class Config:

@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.orm import Session
 from app.models.caixa import Caixa
 from app.schemas.caixa import CaixaCreate, CaixaUpdate
@@ -10,7 +11,7 @@ def get_caixas(db: Session, skip: int = 0, limit: int = 100):
 
 def create_caixa(db: Session, caixa: CaixaCreate):
     db_caixa = Caixa(
-        data_abertura=caixa.data_abertura,
+        data_abertura=datetime.now(),
         saldo_inicial=caixa.saldo_inicial
     )
     db.add(db_caixa)
@@ -19,7 +20,7 @@ def create_caixa(db: Session, caixa: CaixaCreate):
     return db_caixa
 
 def update_caixa(db: Session, db_caixa: Caixa, caixa_update: CaixaUpdate):
-    db_caixa.data_fechamento = caixa_update.data_fechamento
+    db_caixa.data_fechamento = datetime.now()
     db_caixa.saldo_final = caixa_update.saldo_final
     db.commit()
     db.refresh(db_caixa)

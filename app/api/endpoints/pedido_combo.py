@@ -9,8 +9,7 @@ from app.crud.pedido_combo import (
     update_pedido_combo,
     delete_pedido_combo,
 )
-from app.api.deps import get_db, get_current_user
-from app.models.usuario import Usuario
+from app.api.deps import get_db
 
 router = APIRouter()
 
@@ -27,11 +26,11 @@ def read_pedido_combo(pedido_combo_id: int, db: Session = Depends(get_db)):
     return pedido_combo
 
 @router.post("/", response_model=PedidoCombo)
-def create_pedido_combo_endpoint(pedido_combo: PedidoComboCreate, db: Session = Depends(get_db), current_user: Usuario = Depends(get_current_user)):
+def create_pedido_combo_endpoint(pedido_combo: PedidoComboCreate, db: Session = Depends(get_db)):
     return create_pedido_combo(db=db, pedido_combo=pedido_combo)
 
 @router.put("/{pedido_combo_id}", response_model=PedidoCombo)
-def update_pedido_combo_endpoint(pedido_combo_id: int, pedido_combo: PedidoComboUpdate, db: Session = Depends(get_db), current_user: Usuario = Depends(get_current_user)):
+def update_pedido_combo_endpoint(pedido_combo_id: int, pedido_combo: PedidoComboUpdate, db: Session = Depends(get_db)):
     db_pedido_combo = get_pedido_combo(db, pedido_combo_id=pedido_combo_id)
     if db_pedido_combo is None:
         raise HTTPException(status_code=404, detail="PedidoCombo não encontrado")

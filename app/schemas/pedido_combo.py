@@ -9,14 +9,14 @@ class PedidoComboBase(BaseModel):
     combo_id: int
 
 class PedidoComboCreate(PedidoComboBase):
-    produtos_selecionados: List[PedidoComboProdutoCreate]
+    espetos_selecionados: List[PedidoComboProdutoCreate]
 
 class PedidoComboUpdate(PedidoComboBase):
-    produtos_selecionados: List[PedidoComboProdutoCreate]
+    espetos_selecionados: List[PedidoComboProdutoCreate]
 
 class PedidoCombo(PedidoComboBase):
     id: int
-    produtos_selecionados: List[PedidoComboProduto] = []
+    espetos_selecionados: List[PedidoComboProduto] = []
 
     class Config:
         from_attributes = True

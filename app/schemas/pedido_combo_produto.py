@@ -9,6 +9,7 @@ class PedidoComboProdutoCreate(PedidoComboProdutoBase):
 
 class PedidoComboProduto(PedidoComboProdutoBase):
     id: int
+    pedido_combo_id: int
 
     class Config:
         from_attributes = True

@@ -16,16 +16,15 @@ def create_pedido_combo(db: Session, pedido_combo: PedidoComboCreate):
     )
     db.add(db_pedido_combo)
     db.commit()
-    db.refresh(db_pedido_combo)
 
-    for produto in pedido_combo.produtos_selecionados:
+    for produto in pedido_combo.espetos_selecionados:
         db_pedido_combo_produto = PedidoComboProduto(
             pedido_combo_id=db_pedido_combo.id,
             produto_id=produto.produto_id
         )
         db.add(db_pedido_combo_produto)
     db.commit()
-    
+
     db.refresh(db_pedido_combo)
     return db_pedido_combo
 

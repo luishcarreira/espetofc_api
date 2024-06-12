@@ -12,6 +12,8 @@ class PedidoCombo(Base):
     pedido_id: Mapped[int] = mapped_column(ForeignKey("pedidos.id"))
     combo_id: Mapped[int] = mapped_column(ForeignKey("combos.id"))
 
+    espetos_selecionados: Mapped[List["PedidoComboProduto"]] = relationship(back_populates="pedido_combo")
+    
     pedido: Mapped["Pedido"] = relationship("Pedido", back_populates="combos")
+    
     combo: Mapped["Combo"] = relationship("Combo")
-    produtos_selecionados: Mapped[List["PedidoComboProduto"]] = relationship("PedidoComboProduto", back_populates="pedido_combo")

@@ -8,5 +8,5 @@ class PedidoComboProduto(Base):
     pedido_combo_id: Mapped[int] = mapped_column(ForeignKey("pedido_combos.id"))
     produto_id: Mapped[int] = mapped_column(ForeignKey("produtos.id"))
 
-    pedido_combo: Mapped["PedidoCombo"] = relationship("PedidoCombo", back_populates="produtos_selecionados")
+    pedido_combo: Mapped["PedidoCombo"] = relationship(back_populates="espetos_selecionados")
     produto: Mapped["Produto"] = relationship("Produto")

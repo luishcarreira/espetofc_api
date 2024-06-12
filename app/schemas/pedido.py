@@ -3,11 +3,11 @@ from typing import List
 from pydantic import BaseModel
 
 from app.schemas.item import Item, ItemCreate
-from app.schemas.usuario import Usuario
 
 class PedidoBase(BaseModel):
     mesa: int
     status: str
+    observacao: str | None
 
 class PedidoCreate(PedidoBase):
     items: List[ItemCreate]

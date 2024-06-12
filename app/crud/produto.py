@@ -29,6 +29,7 @@ def update_produto(db: Session, db_produto: Produto, produto_update: ProdutoUpda
     db_produto.nome = produto_update.nome
     db_produto.preco = produto_update.preco
     db_produto.descricao = produto_update.descricao
+    db_produto.estoque = produto_update.estoque 
     db_produto.updated_usuario_id = current_user.id
     db_produto.updated_at = datetime.now()
     db.commit()

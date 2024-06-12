@@ -7,6 +7,7 @@ from app.schemas.combo_produto import ComboProdutoCreate, ComboProduto
 class ComboBase(BaseModel):
     nome: str
     preco: float
+    quantidade_espeto: int
 
 class ComboCreate(ComboBase):
     produtos: List[ComboProdutoCreate]

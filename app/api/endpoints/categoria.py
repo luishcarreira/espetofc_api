@@ -31,7 +31,7 @@ def update_categoria_endpoint(categoria_id: int, categoria: categoria_schema.Cat
         raise HTTPException(status_code=404, detail="Categoria não encontrada")
     return categoria_crud.update_categoria(db=db, db_categoria=db_categoria, categoria_update=categoria)
 
-@router.delete("/{categoria_id}", response_model=categoria_schema.Categoria)
+@router.delete("/{categoria_id}", response_model=bool)
 def delete_categoria_endpoint(categoria_id: int, db: Session = Depends(get_db)):
     db_categoria = categoria_crud.get_categoria(db=db, id=categoria_id)
     if db_categoria is None:

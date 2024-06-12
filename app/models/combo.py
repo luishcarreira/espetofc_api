@@ -11,4 +11,5 @@ class Combo(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     nome: Mapped[str] = mapped_column(String(45))
     preco: Mapped[float]
+    quantidade_espeto: Mapped[int]
     produtos: Mapped[List["ComboProduto"]] = relationship("ComboProduto", back_populates="combo")

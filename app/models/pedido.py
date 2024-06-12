@@ -13,6 +13,7 @@ class Pedido(Base):
     emissao: Mapped[datetime.datetime]
     status: Mapped[str] = mapped_column(String(20))
     total: Mapped[float] = mapped_column(nullable=True)
+    observacao: Mapped[str] = mapped_column(String(250), nullable=True)
 
     items: Mapped[List["Item"]] = relationship(back_populates="pedido_items")
     combos: Mapped[List["PedidoCombo"]] = relationship("PedidoCombo", back_populates="pedido")
