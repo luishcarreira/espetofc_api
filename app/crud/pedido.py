@@ -27,8 +27,8 @@ def create_pedido(db: Session, pedido: PedidoCreate, current_user: Usuario):
     
     valor_total: float = 0.0
     for item in pedido.items:
-        valor_total += (item.valor * item.quantidade)
-        db_item = Item(pedido_id=db_pedido.id, produto_id=item.produto_id, quantidade=item.quantidade, valor=item.valor)
+        valor_total += (item.valor_unitario * item.quantidade)
+        db_item = Item(pedido_id=db_pedido.id, produto_id=item.produto_id, quantidade=item.quantidade, valor_unitario=item.valor_unitario)
         db.add(db_item)
 
     db_pedido.total = valor_total
@@ -49,8 +49,8 @@ def update_pedido(db: Session, db_pedido: Pedido, pedido_update: PedidoUpdate, c
     
     valor_total: float = 0.0
     for item in pedido_update.items:
-        valor_total += (item.valor * item.quantidade)
-        db_item = Item(pedido_id=db_pedido.id, produto_id=item.produto_id, quantidade=item.quantidade, valor=item.valor)
+        valor_total += (item.valor_unitario * item.quantidade)
+        db_item = Item(pedido_id=db_pedido.id, produto_id=item.produto_id, quantidade=item.quantidade, valor_unitario=item.valor_unitario)
         db.add(db_item)
 
     db_pedido.total = valor_total

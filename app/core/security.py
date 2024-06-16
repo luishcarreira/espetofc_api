@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
-from typing import Any, Union
-from jose import JWTError, jwt
+from typing import Union
+from jose import ExpiredSignatureError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from app.core.config import settings
@@ -17,7 +17,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     if expires_delta:
         expire = datetime.now() + expires_delta
     else:
-        expire = datetime.now() + timedelta(minutes=15)
+        expire = datetime.now() + timedelta(minutes=30)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, settings.secret_key, algorithm=ALGORITHM)
     return encoded_jwt
@@ -35,6 +35,8 @@ def decode_access_token(token: str):
         if username is None:
             raise 'Username não encontrado'
         token_data = TokenData(username=username)
-    except JWTError:
-        raise 'error jwt'
+    except ExpiredSignatureError:
+        raise ExpiredSignatureError("Signature has expired.")
+    except jwt.JWTError:
+        raise ValueError("Token decode failed.")
     return token_data

@@ -1,6 +1,6 @@
 from fastapi import Depends, FastAPI
 from app.api.deps import get_current_user
-from app.api.endpoints import categoria, auth, produto, pedido, combo, caixa, transacao, pedido_combo
+from app.api.routes import categoria, auth, produto, pedido, combo, caixa, transacao, pedido_combo
 
 app = FastAPI()
 

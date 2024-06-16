@@ -7,7 +7,6 @@ from app.schemas.token import Token
 from app.crud.usuario import create_user, get_user_by_username
 from app.core.security import create_access_token, verify_password
 from app.api.deps import get_db
-# from app.core.config import settings
 
 router = APIRouter()
 

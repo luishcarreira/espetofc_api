@@ -9,8 +9,11 @@ class Produto(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     nome: Mapped[str] = mapped_column(String(45))
     descricao: Mapped[str] = mapped_column(String(200))
-    preco: Mapped[float]
-    estoque: Mapped[int]
+    preco_custo: Mapped[float]
+    preco_venda: Mapped[float]
+    medida: Mapped[str] = mapped_column(String(2))
+    estoque_minimo: Mapped[int]
+    estoque_atual: Mapped[int]
     foto_url: Mapped[str] = mapped_column(String(500), nullable=True)
 
     categoria_id: Mapped[int] = mapped_column(ForeignKey("categorias.id"))
@@ -25,3 +28,5 @@ class Produto(Base):
     updated_at: Mapped[datetime.datetime] = mapped_column(DateTime, nullable=True)
 
     items: Mapped[List["Item"]] = relationship(back_populates="produto")
+
+    movimentacoes_estoque: Mapped[List["MovimentacaoEstoque"]] = relationship(back_populates="produto")

@@ -10,7 +10,7 @@ class Item(Base):
     produto_id: Mapped[int] = mapped_column(ForeignKey("produtos.id"), primary_key=True)
     
     quantidade: Mapped[int]
-    valor: Mapped[float]
+    valor_unitario: Mapped[float]
     
     pedido_items: Mapped['Pedido'] = relationship(back_populates="items")
     produto: Mapped['Produto'] = relationship(back_populates="items")
